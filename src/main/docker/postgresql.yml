@@ -1,0 +1,11 @@
+version: '2'
+services:
+  docapp-postgresql:
+    image: postgres:12.1
+    # volumes:
+    #     - ~/volumes/jhipster/docApp/postgresql/:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=docApp
+      - POSTGRES_PASSWORD=
+    ports:
+      - 5432:5432
