@@ -13,6 +13,7 @@ import { DocumentoService } from './documento.service';
 import { AlertError } from 'app/shared/alert/alert-error.model';
 import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
+import { AccountService } from 'app/core/auth/account.service'
 
 @Component({
   selector: 'jhi-documento-update',
@@ -38,15 +39,19 @@ export class DocumentoUpdateComponent implements OnInit {
     protected documentoService: DocumentoService,
     protected userService: UserService,
     protected activatedRoute: ActivatedRoute,
+    protected accountService: AccountService,
     private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ documento }) => {
-      if (!documento.id) {
-        const today = moment().startOf('day');
-        documento.fechaCreacion = today;
-      }
+       if (!documento.id) {
+         // const today = moment().startOf('day');
+         // documento.fechaCreacion = today;
+         documento.fechaCreacion = moment(new Date());
+       }
+
+      this.accountService.identity().subscribe( account => documento.creador = account);
 
       this.updateForm(documento);
 

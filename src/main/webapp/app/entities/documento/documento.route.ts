@@ -10,6 +10,7 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access-service'
 import { IDocumento, Documento } from 'app/shared/model/documento.model';
 import { DocumentoService } from './documento.service';
 import { DocumentoComponent } from './documento.component';
+import { DocumentoUserComponent } from './documento-user.component';
 import { DocumentoDetailComponent } from './documento-detail.component';
 import { DocumentoUpdateComponent } from './documento-update.component';
 
@@ -49,6 +50,19 @@ export const documentoRoute: Routes = [
     },
     canActivate: [UserRouteAccessService]
   },
+  {
+    path: 'user',
+    component: DocumentoUserComponent,
+    resolve: {
+      pagingParams: JhiResolvePagingParams
+    },
+    data: {
+      authorities: [Authority.USER],
+      defaultSort: 'id,asc',
+      pageTitle: 'docApp.documento.home.title'
+    },
+    canActivate: [UserRouteAccessService]
+  },  
   {
     path: ':id/view',
     component: DocumentoDetailComponent,

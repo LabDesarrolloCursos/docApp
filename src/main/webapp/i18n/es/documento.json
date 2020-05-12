@@ -20,7 +20,8 @@
       "fechaCreacion": "Fecha Creacion",
       "descripcion": "Descripcion",
       "archivo": "Archivo",
-      "creador": "Creador"
+      "creador": "Creador",
+      "documentoUsuario":  "Documentos del Usuario"
     }
   }
 }

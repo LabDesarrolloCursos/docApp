@@ -26,7 +26,7 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="docApp.documento.fechaCreacion" for="field_fechaCreacion">Fecha Creacion</label>
                     <div class="d-flex">
-                        <input id="field_fechaCreacion" type="datetime-local" class="form-control" name="fechaCreacion" formControlName="fechaCreacion" placeholder="YYYY-MM-DD HH:mm"/>
+                        <input readonly id="field_fechaCreacion" type="datetime-local" class="form-control" name="fechaCreacion" formControlName="fechaCreacion" placeholder="YYYY-MM-DD HH:mm"/>
                     </div>
                     <div *ngIf="editForm.get('fechaCreacion')!.invalid && (editForm.get('fechaCreacion')!.dirty || editForm.get('fechaCreacion')!.touched)">
                         <small class="form-text text-danger"
@@ -67,7 +67,7 @@
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="docApp.documento.creador" for="field_creador">Creador</label>
-                    <select class="form-control" id="field_creador" name="creador" formControlName="creador">
+                    <select disabled class="form-control" id="field_creador" name="creador" formControlName="creador">
                         <option *ngIf="!editForm.get('creador')!.value" [ngValue]="null" selected></option>
                         <option [ngValue]="userOption.id === editForm.get('creador')!.value?.id ? editForm.get('creador')!.value : userOption" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.login }}</option>
                     </select>

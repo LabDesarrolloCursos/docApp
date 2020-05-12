@@ -13,7 +13,7 @@ export class DocumentoDeleteDialogComponent {
 
   constructor(protected documentoService: DocumentoService, public activeModal: NgbActiveModal, protected eventManager: JhiEventManager) {}
 
-  cancel(): void {
+  cancel(): void { 
     this.activeModal.dismiss();
   }
 
