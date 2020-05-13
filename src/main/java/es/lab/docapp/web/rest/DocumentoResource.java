@@ -111,7 +111,7 @@ public class DocumentoResource {
     public ResponseEntity<List<Documento>> getAllDocumentosUser(Pageable pageable, Principal principal) {
         log.debug("REST request to get a page of User Documentos");
         String userLogin = principal.getName();
-        Page<Documento> page = documentoRepository.findByCreador_Login(userLogin, pageable);
+        Page<Documento> page = documentoRepository.findByCreadorLogin(userLogin, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

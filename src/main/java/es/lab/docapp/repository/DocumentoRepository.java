@@ -19,5 +19,5 @@ public interface DocumentoRepository extends JpaRepository<Documento, Long> {
     @Query("select documento from Documento documento where documento.creador.login = ?#{principal.username}")
     List<Documento> findByCreadorIsCurrentUser();
 
-    Page<Documento> findByCreador_Login(String login, Pageable pageable);
+    Page<Documento> findByCreadorLogin(String login, Pageable pageable);
 }
