@@ -62,7 +62,7 @@ export const documentoRoute: Routes = [
       pageTitle: 'docApp.documento.home.title'
     },
     canActivate: [UserRouteAccessService]
-  },  
+  },
   {
     path: ':id/view',
     component: DocumentoDetailComponent,

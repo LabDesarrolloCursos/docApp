@@ -12,7 +12,7 @@ import { DocumentoService } from './documento.service';
 import { DocumentoDeleteDialogComponent } from './documento-delete-dialog.component';
 
 @Component({
-  selector: 'jhi-documento',
+  selector: 'jhi-user-documento',
   templateUrl: './documento-user.component.html'
 })
 export class DocumentoUserComponent implements OnInit, OnDestroy {
@@ -38,7 +38,7 @@ export class DocumentoUserComponent implements OnInit, OnDestroy {
     const pageToLoad: number = page || this.page;
 
     this.documentoService
-      .query({
+      .findByUser({
         page: pageToLoad - 1,
         size: this.itemsPerPage,
         sort: this.sort()
@@ -99,7 +99,7 @@ export class DocumentoUserComponent implements OnInit, OnDestroy {
   protected onSuccess(data: IDocumento[] | null, headers: HttpHeaders, page: number): void {
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.page = page;
-    this.router.navigate(['/documento'], {
+    this.router.navigate(['/documento/user'], {
       queryParams: {
         page: this.page,
         size: this.itemsPerPage,

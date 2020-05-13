@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -96,6 +97,21 @@ public class DocumentoResource {
     public ResponseEntity<List<Documento>> getAllDocumentos(Pageable pageable) {
         log.debug("REST request to get a page of Documentos");
         Page<Documento> page = documentoRepository.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+        /**
+     * {@code GET  /documentos/user} : get all the documentos.
+     *
+     * @param pageable the pagination information.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of documentos in body.
+     */
+    @GetMapping("/documentos/user")
+    public ResponseEntity<List<Documento>> getAllDocumentosUser(Pageable pageable, Principal principal) {
+        log.debug("REST request to get a page of User Documentos");
+        String userLogin = principal.getName();
+        Page<Documento> page = documentoRepository.findByCreador_Login(userLogin, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
